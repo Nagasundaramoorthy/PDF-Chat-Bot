@@ -31,6 +31,7 @@ st.write("Upload PDF and chat with it")
 
 ## Input groq api key 
 api_key = os.getenv("GROQ_API_KEY")
+st.title(f"Groq API KEY IS {api_key}")
 
 ## Check if groq api key is provided 
 if api_key:
