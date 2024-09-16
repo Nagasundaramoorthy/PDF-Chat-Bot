@@ -10,9 +10,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Run script with multiple API keys
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'  
+
+    - name: Install dependencies
       run: |
-        echo "API Key 1: ${{ secrets.GEMINI_KEY }}"
-        echo "API Key 2: ${{ secrets.GROQ_API_KEY }}"
-        echo "API Key 3: ${{ secrets.HF_API_KEY }}"
-        echo "API Key 4: ${{ secrets.LANGCHAIN_API_KEY }}"
+        pip install -r requirements.txt  # Assuming you have a requirements.txt file
+
+    - name: Run Python script with API keys
+      env:
+        GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        HF_API_KEY: ${{ secrets.HF_API_KEY }}
+        LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
+      run: |
+        python app.py
